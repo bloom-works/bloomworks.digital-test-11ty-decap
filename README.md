@@ -28,10 +28,18 @@ Press CTRL+C to shut down the server.
 This runs the container's Bash terminal so that you can run `node`, `npm`, or other commands in the build environment:
 
 ```sh
-sh docker/run-bash.sh
+sh run-bash.sh
 ```
 
-Type `exit` to leave the container.
+Type `exit` to leave the container terminal.
+
+### Build Site
+
+This builds the static website files, and dumps in `11ty/_site`.
+
+```sh
+sh build-site.sh
+```
 
 ## Build the Site for Production
 
