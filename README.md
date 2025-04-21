@@ -10,7 +10,7 @@ You only need to do this the first time, or as specificed.
 
 1. Clone this repo
 1. `cd` into the base directory
-1. Build the Docker image: `sh build-image.sh` (run when `docker/Dockfile` changes)
+1. Build the Docker image: `sh build-image.sh` (run when `Dockfile` changes)
 1. Install dependencies: `sh install-deps.sh` (run when `package.json` changes)
 
 ### Run Server
