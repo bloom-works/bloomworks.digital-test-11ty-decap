@@ -1,0 +1,7 @@
+{
+    "name": "bloomworks.digital-11ty-proto",
+    "version": "0.0.1",
+    "dependencies": {
+        "@11ty/eleventy": "3.0.0"
+    }
+}
