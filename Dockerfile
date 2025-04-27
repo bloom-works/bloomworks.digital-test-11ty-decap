@@ -47,4 +47,4 @@ RUN $SOURCE_NVM && npm install
 EXPOSE 8080
 
 # Command to run the 11ty development server as the non-root user
-CMD ${SOURCE_NVM} && npx @11ty/eleventy --serve --port=8080 --incremental
+CMD ${SOURCE_NVM} && npm run serve
