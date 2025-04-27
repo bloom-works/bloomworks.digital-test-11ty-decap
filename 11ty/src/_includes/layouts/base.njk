@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    {{ collections.all | eleventyNavigation | eleventyNavigationToHtml | safe }}
+    {% set navPages = collections.all | eleventyNavigation %}
+    {{ navPages | dump | safe }}
 
     <main>
         {{ content | safe }}
