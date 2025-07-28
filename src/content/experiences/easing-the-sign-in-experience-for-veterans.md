@@ -1,5 +1,5 @@
 ---
-title: Easing the sign-in experience for veterans
+title: Easing the sign-in experience for veterans!!
 subtitle: Supporting a simpler and more secure sign-in experience.
 heroImage: /images/uploads/cs-hero-3.png
 cardImage: /images/uploads/va-login-card.png
