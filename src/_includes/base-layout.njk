@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <link rel="icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,300;0,700;1,300&family=Permanent+Marker&display=swap">
+    <link rel="stylesheet" href="/site.css">
+  </head>
+  <body>
+    <div id="platform-banner" style="--banner-color: #ff0082">This is a prototype: 11ty + Decap</div>
+
+    <header class="site-header">
+      <a href="/" class="header-logo"><img
+        alt="Bloom Works"
+        src="/images/logo.svg"
+      ></a>
+      <nav>
+        <ol>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/experiences">Case Studies</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <main>
+      {% block main %}
+        {{ content | safe }}
+      {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      © 2025 Bloom Works
+    </footer>
+
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

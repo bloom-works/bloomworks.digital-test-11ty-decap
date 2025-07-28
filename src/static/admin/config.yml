@@ -1,0 +1,206 @@
+backend:
+  name: git-gateway
+  branch: main
+  squash_merges: true
+
+local_backend: true
+
+publish_mode: editorial_workflow
+
+# Where to place uploaded media. `public_folder` is the URL prefix that
+# corresponds to this folder in the built site.
+media_folder: "src/static/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "experiences"
+    label: "Case Studies"
+    label_singular: "Case Study"
+    folder: "src/content/experiences"
+    create: true
+    preview_path: experiences/{{slug}}
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - label: Hero Image
+        name: heroImage
+        widget: image
+        allow_multiple: false
+      - label: Card Image
+        name: cardImage
+        widget: image
+        allow_multiple: false
+      - label: "Services"
+        name: "services"
+        widget: "relation"
+        multiple: true
+        collection: "practiceAreas"
+        search_fields: ["services.*"]
+        display_fields: ["{{name}}:", "services.*"]
+        value_field: "services.*"
+      - label: Roles
+        name: roles
+        widget: list
+      - label: Project Start
+        name: "projectStart"
+        widget: "datetime"
+        default: "{{now}}"
+        date_format: true
+      - label: Project End
+        name: "projectEnd"
+        widget: "datetime"
+        date_format: true
+        required: false
+      - label: Clients
+        name: clients
+        widget: relation
+        multiple: true
+        min: 1
+        collection: clients
+        search_fields: ["name"]
+        display_fields: ["name"]
+        value_field: "{{slug}}"
+      - { label: "Body", name: "body", widget: "markdown" }
+      - label: Related
+        name: related
+        widget: relation
+        multiple: true
+        required: false
+        collection: experiences
+        search_fields: ["title", "clients.*.name"]
+        display_fields: ["title"]
+        value_field: "{{slug}}"
+
+  - name: "practiceAreas"
+    label: "Practice Areas"
+    label_singular: "Practice Area"
+    folder: "src/_data/practiceAreas"
+    format: "json"
+    create: true
+    identifier_field: "name"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - label: Services
+        name: services
+        widget: list
+        collapsed: false
+        minimize_collapsed: true
+        summary: '{{fields.service}}'
+        field: {label: "Service", name: "service", widget: "string"}
+
+  - name: "clients"
+    label: "Clients"
+    label_singular: "Client"
+    folder: "src/_data/allClients"
+    format: "json"
+    create: true
+    identifier_field: "name"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Type", name: "type", widget: "string" }
+
+  - name: "authors"
+    label: "Authors"
+    label_singular: "Author"
+    folder: "src/content/authors"
+    create: true
+    preview_path: authors/{{slug}}
+    identifier_field: name
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: "string"
+      - label: "Image"
+        name: "image"
+        widget: "image"
+        allow_multiple: false
+      - label: "Bio"
+        name: "body"
+        widget: "markdown"
+        required: false
+
+  - name: "blog"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "src/content/blog"
+    create: true
+    preview_path: blog/{{slug}}
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Publish Date"
+        name: "publishDate"
+        widget: "datetime"
+        default: "{{now}}"
+        date_format: true
+      - label: "Authors"
+        name: "authors"
+        widget: "relation"
+        multiple: true
+        min: 1
+        collection: "authors"
+        search_fields: ["name"]
+        display_fields: ["name"]
+        value_field: "{{slug}}"
+      - label: "Tags"
+        name: tags
+        widget: list
+        required: false
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Excerpt", name: "excerpt", widget: "markdown", required: false }
+
+  - label: "Main Pages"
+    name: "pages"
+    format: frontmatter
+    files:
+      - label: "Case Studies Home"
+        name: "case-studies"
+        file: "src/content/experiences.njk"
+        format: frontmatter
+        fields:
+          - {label: Title, name: title, widget: string}
+
+      - label: "Home"
+        name: "home"
+        file: "src/content/index.njk"
+        format: frontmatter
+        fields:
+          - label: Title
+            name: title
+            widget: string
+
+          - label: 'Sections'
+            name: 'sections'
+            widget: 'list'
+            types:
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - { label: "Text", name: "text", widget: "markdown" }
+              - label: Image
+                name: image
+                widget: object
+                fields:
+                  - { label: "Image", name: "image", widget: "image", allow_multiple: false }
+                  - { label: "Alt", name: "alt", widget: "string", required: false }
+                  - label: Width
+                    name: width
+                    widget: "select"
+                    options:
+                      - { label: "Full", value: "full" }
+                      - { label: "Body", value: "body" }
+                      - { label: "Image's own width", value: "image" }
+              - label: Image and Text
+                name: imageAndText
+                widget: object
+                fields:
+                  - { label: "Image", name: "image", widget: "image", allow_multiple: false }
+                  - { label: "Alt", name: "alt", widget: "string", required: false }
+                  - { label: "Text", name: "text", widget: "markdown" }
+                  - { label: "Background", name: "background", widget: "color", allowInput: true, enableAlpha: true, required: false }
+              - label: Raw HTML
+                name: html
+                widget: object
+                fields:
+                  - { label: "HTML", name: "html", widget: "text" }

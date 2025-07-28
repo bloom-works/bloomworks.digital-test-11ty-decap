@@ -1,0 +1,22 @@
+{#
+  This should be used with `renderFile` so you can pass in data.
+  We do this instead of use a native Nunucks macro because `renderContent`
+  to handle Markdown doesn't work in macros. :(
+ #}
+<ol class="blog-post-list">
+  {% for entry in posts %}
+    <li>
+      <a href="{{ entry.url }}">{{ entry.data.title }}</a>
+      ({{ entry.data.publishDate | humanDate }})
+      <div>
+        {{ entry.data.excerpt | renderContent("md") | safe }}
+      </div>
+      <div>
+        Tags:
+        {% for tag in entry.data.tags %}
+          {{ tag }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      </div>
+    </li>
+  {% endfor %}
+</ol>

@@ -1,0 +1,31 @@
+{
+  "name": "bloomworks.digital-test-11ty-decap",
+  "version": "1.0.0",
+  "description": "Prototype of Bloomworks.digital on 11ty + Decap CMS.",
+  "homepage": "https://github.com/bloom-works/bloomworks.digital-test-11ty-decap#readme",
+  "bugs": {
+    "url": "https://github.com/bloom-works/bloomworks.digital-test-11ty-decap/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bloom-works/bloomworks.digital-test-11ty-decap.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "11ty-dev": "npx @11ty/eleventy --serve",
+    "decap-dev": "npx decap-server",
+    "start": "concurrently 'npm run 11ty-dev' 'npm run decap-dev'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "decap-server": "^3.3.0"
+  }
+}

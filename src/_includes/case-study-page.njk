@@ -1,0 +1,63 @@
+{% extends "base-layout.njk" %}
+
+{% block main %}
+  <div class="standard-wrapper">
+    <article class="hero-page">
+      <header
+        class="hero-title"
+        style="background: no-repeat center/cover url('{{ heroImage }}');"
+      >
+        <h1>{{ title }}</h1>
+        <p>
+          {% for clientSlug in clients %}
+            {% set client = allClients[clientSlug] %}
+            {{ client.name }}{% if not loop.last %},{% endif %}
+          {% endfor %}
+        </p>
+      </header>
+
+      <p>
+        <strong>Project dates:</strong>
+        {{ projectStart | monthAndYear }}
+        –
+        {% if projectEnd %}
+          {{ projectEnd | monthAndYear }}
+        {% else %}
+          Present
+        {% endif %}
+      </p>
+
+      {{ content | safe }}
+
+      <section>
+        <h2>Services</h2>
+        <ul>
+          {% for service in services %}
+            <li>{{ service }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section>
+        <h2>Roles</h2>
+        <ul>
+          {% for role in roles %}
+            <li>{{ role }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section>
+        <h2>Related</h2>
+        <ul>
+          {% for relatedEntry in relatedFiles %}
+            <li>
+              <a href="{{ relatedEntry.page.url }}">{{ relatedEntry.data.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </article>
+
+  </div>
+{% endblock %}

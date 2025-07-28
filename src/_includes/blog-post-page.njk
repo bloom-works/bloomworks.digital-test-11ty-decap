@@ -1,0 +1,26 @@
+{% extends "base-layout.njk" %}
+
+{% block main %}
+  <div class="standard-wrapper">
+    <header>
+      <h1>{{ title }}</h1>
+      <p>Published on {{ publishDate | humanDate }}</p>
+      <p>
+        By
+        {% for author in authorFiles %}
+          <a
+            href="{{ author.page.url }}/"
+          >{{ author.data.name }}</a>{% if not loop.last %},{% endif %}
+        {% endfor %}
+      </p>
+      <p>
+        Tags:
+        {% for tag in tags %}
+          {{ tag }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      </p>
+    </header>
+
+    {{ content | safe }}
+  </div>
+{% endblock %}

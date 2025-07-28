@@ -1,0 +1,10 @@
+---
+title: Blog
+layout: 'simple-page.njk'
+---
+<h1>Pollinator: the Bloom Works blog</h1>
+
+{%
+  renderFile "src/_includes/blog-post-list.njk",
+  {posts: collections.blogPosts}
+%}

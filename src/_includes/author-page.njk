@@ -1,0 +1,22 @@
+{% extends "base-layout.njk" %}
+
+{% block main %}
+  <div class="standard-wrapper">
+    <header>
+      <h1>{{ name }}</h1>
+    </header>
+
+    <img src="{{ image }}" alt="">
+    {{ content | safe }}
+
+    <section>
+      <h2>Posts</h2>
+
+      {%
+        renderFile "src/_includes/blog-post-list.njk",
+        {posts: authorPosts}
+      %}
+    </section>
+
+  </div>
+{% endblock %}

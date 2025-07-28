@@ -1,0 +1,25 @@
+---
+title: Case Studies
+layout: simple-page.njk
+---
+<h1>{{ title }}</h1>
+
+<ul class="case-study-list">
+  {% for child in collections.experiences %}
+    <li class="case-study-card">
+      <a href="{{ child.url }}">
+        <img src="{{ child.data.cardImage }}" alt="">
+        <div class="card-body">
+          <h2 class="card-title">{{ child.data.title }}</h2>
+          <p class="client">
+            {% for clientSlug in child.data.clients %}
+              {% set client = allClients[clientSlug] %}
+              {{ client.name }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+          </p>
+          <p>{{ child.data.subtitle }}</p>
+        </div>
+      </a>
+    </li>
+  {% endfor %}
+</ul>
